@@ -5,31 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Birthday Card" />
-  <meta name="theme-color" content="#1a0a14" />
+  <meta name="apple-mobile-web-app-title" content="Valentines" />
+  <meta name="theme-color" content="#ffb6c1" />
   <meta name="mobile-web-app-capable" content="yes" />
 
-  <title>Birthday Card</title>
+  <title>Valentines</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icon-512.png" />
   <link rel="icon" type="image/png" href="icon-512.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Gate: show when link has no secret token -->
+  <div id="gateInvalid" class="gate-invalid" aria-live="polite">
+    <p>This link isn't valid.</p>
+  </div>
+  <!-- Gate: password (only shown when link has token) -->
+  <div id="gatePassword" class="gate-password hidden" aria-live="polite">
+    <label for="gateInput">Enter the password</label>
+    <input type="password" id="gateInput" placeholder="password" autocomplete="off" />
+    <p id="gateError" class="gate-error" aria-live="polite"></p>
+    <button type="button" id="gateSubmit">Open</button>
+  </div>
+
   <div id="hearts" class="hearts" aria-hidden="true"></div>
 
   <main class="stage">
     <div class="card-wrapper" id="cardWrapper">
       <div class="card" id="card">
-        <div class="card-face card-front">
-          <span class="tap-hint">Tap to open</span>
-          <span class="front-heart">♥</span>
+        <div class="card-face card-front proposal-front">
+          <span class="corner-heart corner-tl">♥</span>
+          <span class="corner-heart corner-tr">♥</span>
+          <span class="corner-heart corner-bl">♥</span>
+          <span class="corner-heart corner-br">♥</span>
+          <h2 class="proposal-q">Will you be my girlfriend?</h2>
+          <div class="proposal-row">
+            <img src="images/Elli.png" alt="Elli" class="proposal-char proposal-elli" />
+            <span class="proposal-heart">♥</span>
+            <img src="images/Conrad.png" alt="Conrad" class="proposal-char proposal-conrad" />
+          </div>
+          <div class="proposal-stars">★ ★ ★</div>
+          <div class="proposal-buttons">
+            <button type="button" class="btn-yes" id="btnYes">YES!</button>
+            <button type="button" class="btn-no" id="btnNo">NO</button>
+          </div>
         </div>
-        <div class="card-face card-back">
-          <h1>Happy Birthday!</h1>
-          <p class="message">Wishing you the best day ever.</p>
-          <div class="hearts-inner"></div>
+        <div class="card-face card-back proposal-back">
+          <img src="images/pig.png" alt="" class="proposal-pig" id="pigImage" />
+          <p class="proposal-love">love you</p>
+          <a href="images/pig.png" download="valentines-pig.png" class="btn-download" id="btnDownload">Liebe zum Download</a>
         </div>
       </div>
     </div>
@@ -37,6 +65,10 @@
 
   <canvas id="confetti" aria-hidden="true"></canvas>
 
+  <!-- Set to your Vercel API URL so Discord is notified (webhook stays secret). Leave empty to disable. -->
+  <script>
+    window.VALENTINES_API_URL = '';
+  </script>
   <script src="app.js"></script>
 </body>
 </html>

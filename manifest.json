@@ -1,12 +1,12 @@
 {
-  "name": "Birthday Card",
-  "short_name": "Birthday",
-  "description": "A tiny animated birthday card",
+  "name": "Valentines",
+  "short_name": "Valentines",
+  "description": "A tiny animated valentines",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#1a0a14",
-  "theme_color": "#1a0a14",
+  "background_color": "#ffb6c1",
+  "theme_color": "#ffb6c1",
   "icons": [
     {
       "src": "icon-512.png",

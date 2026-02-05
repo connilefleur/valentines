@@ -19,12 +19,92 @@ body {
   overflow: hidden;
   position: fixed;
   inset: 0;
-  font-family: "Georgia", "Times New Roman", serif;
-  background: linear-gradient(160deg, #1a0a14 0%, #2d1525 40%, #1a0a14 100%);
-  color: #fce4ec;
+  font-family: "Press Start 2P", "Georgia", serif;
+  color: #e91e63;
   -webkit-user-select: none;
   user-select: none;
   touch-action: manipulation;
+}
+
+/* --- Gate: invalid link --- */
+.gate-invalid {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  z-index: 20;
+  background: linear-gradient(160deg, #1a0a14 0%, #2d1525 100%);
+}
+.gate-invalid p {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+.gate-invalid.hidden {
+  display: none;
+}
+
+/* --- Gate: password --- */
+.gate-password {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 20;
+  background: linear-gradient(160deg, #1a0a14 0%, #2d1525 100%);
+}
+.gate-password.hidden {
+  display: none;
+}
+.gate-password label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+.gate-password input {
+  font: inherit;
+  font-size: 1.1rem;
+  padding: 0.6rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fce4ec;
+  width: 100%;
+  max-width: 220px;
+  text-align: center;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.gate-password input::placeholder {
+  color: rgba(252, 228, 236, 0.4);
+}
+.gate-password input:focus {
+  outline: none;
+  border-color: #ff8fa3;
+}
+.gate-password .gate-error {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #ff8fa3;
+  min-height: 1.4em;
+}
+.gate-password button {
+  margin-top: 1rem;
+  font: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  background: #8b2942;
+  color: #fce4ec;
+  cursor: pointer;
 }
 
 /* --- Background floating hearts --- */
@@ -65,14 +145,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 3%;
   perspective: 1200px;
+  background: #ffb6c1;
 }
 
 .card-wrapper {
-  width: min(320px, 85vw);
-  aspect-ratio: 3/4;
-  max-height: 75vh;
+  width: min(88vw, 380px);
+  aspect-ratio: 3 / 4;
+  max-height: min(85vh, 88vw * 4 / 3);
 }
 
 /* --- 3D card --- */
@@ -82,7 +163,6 @@ body {
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
 }
 
 .card.is-open {
@@ -94,70 +174,155 @@ body {
   inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border-radius: 16px;
+  border-radius: clamp(8px, 2vw, 14px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Proposal front: white card, even % spacing --- */
+.card-front.proposal-front {
+  background: #fff;
+  border: 3px solid #ffb6c1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* Padding reserves space for corner hearts so content doesn't overlap */
+  padding: 14% 12% 12% 12%;
+  gap: 0;
+}
+
+.corner-heart {
+  position: absolute;
+  font-size: clamp(1.8rem, 7.5vw, 2.55rem);
+  color: #d81b60;
+  pointer-events: none;
+}
+/* Sit in the corner padding zone (within the 14% / 12% padding) */
+.corner-tl { top: 3%; left: 3%; }
+.corner-tr { top: 3%; right: 3%; }
+.corner-bl { bottom: 3%; left: 3%; }
+.corner-br { bottom: 3%; right: 3%; }
+
+.proposal-q {
+  font-family: "Press Start 2P", cursive;
+  font-size: clamp(0.45rem, 2.2vw, 0.7rem);
+  line-height: 1.7;
+  color: #e91e63;
+  margin: 0;
+  text-align: center;
+  padding: 0 2%;
+  flex-shrink: 0;
+}
+
+.proposal-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4%;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+.proposal-char {
+  width: 26%;
+  max-width: 90px;
+  height: auto;
+  object-fit: contain;
+}
+
+.proposal-heart {
+  font-size: clamp(1.2rem, 5vw, 2.2rem);
+  color: #e91e63;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.proposal-stars {
+  font-size: clamp(0.45rem, 2vw, 0.65rem);
+  color: #ffb6c1;
+  letter-spacing: 0.25em;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.proposal-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5%;
+  min-height: 0;
+  padding: 2% 0 0;
+  flex-shrink: 0;
+}
+
+.btn-yes,
+.btn-no {
+  font-family: "Press Start 2P", cursive;
+  font-size: clamp(0.45rem, 1.8vw, 0.65rem);
+  padding: 0.5em 1.2em;
+  border: none;
+  border-radius: clamp(6px, 1.5vw, 10px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.btn-yes {
+  background: #e91e63;
+  color: #fff;
+}
+
+.btn-no {
+  background: #ffb6c1;
+  color: #fff;
+}
+
+/* --- Proposal back: pig + love you --- */
+.card-back.proposal-back {
+  background: #fff;
+  border: 3px solid #ffb6c1;
+  transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  padding: 8% 6%;
+  gap: 4%;
 }
 
-/* --- Front (closed) --- */
-.card-front {
-  background: linear-gradient(145deg, #8b2942 0%, #5c1a2e 100%);
-  border: 2px solid rgba(255, 255, 255, 0.15);
+.proposal-pig {
+  width: 55%;
+  max-width: 180px;
+  height: auto;
+  object-fit: contain;
 }
 
-.tap-hint {
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.9;
-  margin-bottom: 0.5rem;
-}
-
-.front-heart {
-  font-size: clamp(3rem, 15vw, 5rem);
-  color: #ffb3c6;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.08); opacity: 0.9; }
-}
-
-/* --- Back (inside) --- */
-.card-back {
-  background: linear-gradient(160deg, #3d1a2e 0%, #1a0a14 100%);
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  transform: rotateY(180deg);
-}
-
-.card-back h1 {
-  margin: 0 0 0.5rem;
-  font-size: clamp(1.6rem, 6vw, 2.2rem);
-  font-weight: 600;
-  text-align: center;
-  color: #ffb3c6;
-  text-shadow: 0 0 20px rgba(255, 179, 198, 0.3);
-}
-
-.card-back .message {
+.proposal-love {
+  font-family: "Press Start 2P", cursive;
+  font-size: clamp(0.55rem, 2.5vw, 0.9rem);
+  color: #e91e63;
   margin: 0;
-  font-size: clamp(0.95rem, 3.5vw, 1.1rem);
-  opacity: 0.95;
-  text-align: center;
-  line-height: 1.5;
 }
 
-.hearts-inner {
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  letter-spacing: 0.3em;
-  color: #ff8fa3;
-  opacity: 0.8;
+.btn-download {
+  font-family: "Press Start 2P", cursive;
+  font-size: clamp(0.35rem, 1.4vw, 0.55rem);
+  padding: 0.5em 1em;
+  border-radius: clamp(6px, 1.5vw, 10px);
+  background: #ffb6c1;
+  color: #e91e63;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  margin-top: 2%;
+}
+
+.btn-download:hover,
+.btn-download:focus {
+  background: #e91e63;
+  color: #fff;
 }
 
 /* --- Confetti canvas --- */
