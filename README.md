@@ -1,4 +1,4 @@
-# Birthday Card PWA
+# Valentines PWA
 
 A tiny **PWA** that works like a mini iPhone app: fullscreen, no Safari chrome, own icon. Send the link via iMessage and tell them **“Open and Add to Home Screen”**.
 
@@ -13,12 +13,12 @@ A tiny **PWA** that works like a mini iPhone app: fullscreen, no Safari chrome, 
 
 ## Deploy (this repo)
 
-Repo: **https://github.com/connilefleur/birthday-card**
+Repo: **https://github.com/connilefleur/valentines**
 
 1. On GitHub: **Settings → Pages**
 2. Under “Build and deployment”, set **Source** to **GitHub Actions** (or “Deploy from a branch”)
 3. If using a branch: choose branch **main**, folder **/ (root)**, Save
-4. After a minute, the site is live at: **https://connilefleur.github.io/birthday-card/**
+4. After a minute, the site is live at: **https://connilefleur.github.io/valentines/**
 
 Other options: **Vercel** (drag folder or `vercel`), **Netlify** (drag folder or `netlify deploy`).
 
