@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Birthday Card" />
+  <meta name="theme-color" content="#1a0a14" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <title>Birthday Card</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-512.png" />
+  <link rel="icon" type="image/png" href="icon-512.png" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="hearts" class="hearts" aria-hidden="true"></div>
+
+  <main class="stage">
+    <div class="card-wrapper" id="cardWrapper">
+      <div class="card" id="card">
+        <div class="card-face card-front">
+          <span class="tap-hint">Tap to open</span>
+          <span class="front-heart">♥</span>
+        </div>
+        <div class="card-face card-back">
+          <h1>Happy Birthday!</h1>
+          <p class="message">Wishing you the best day ever.</p>
+          <div class="hearts-inner"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
