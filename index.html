@@ -20,18 +20,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Gate: show when link has no secret token -->
-  <div id="gateInvalid" class="gate-invalid" aria-live="polite">
-    <p>This link isn't valid.</p>
-  </div>
-  <!-- Gate: password (only shown when link has token) -->
-  <div id="gatePassword" class="gate-password hidden" aria-live="polite">
-    <label for="gateInput">Enter the password</label>
-    <input type="password" id="gateInput" placeholder="password" autocomplete="off" />
-    <p id="gateError" class="gate-error" aria-live="polite"></p>
-    <button type="button" id="gateSubmit">Open</button>
-  </div>
-
   <div id="hearts" class="hearts" aria-hidden="true"></div>
 
   <main class="stage">

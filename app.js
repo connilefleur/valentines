@@ -1,15 +1,6 @@
 (function () {
   'use strict';
 
-  var PASSWORD = 'elli';
-  var STORAGE_KEY = 'valentines_ok';
-
-  var gateInvalid = document.getElementById('gateInvalid');
-  var gatePassword = document.getElementById('gatePassword');
-  var gateInput = document.getElementById('gateInput');
-  var gateError = document.getElementById('gateError');
-  var gateSubmit = document.getElementById('gateSubmit');
-
   var card = document.getElementById('card');
   var cardWrapper = document.getElementById('cardWrapper');
   var heartsContainer = document.getElementById('hearts');
@@ -20,65 +11,6 @@
   function getToken() {
     var params = new URLSearchParams(window.location.search);
     return params.get('t') || '';
-  }
-
-  function isUnlocked() {
-    return sessionStorage.getItem(STORAGE_KEY) === '1';
-  }
-
-  function setUnlocked() {
-    sessionStorage.setItem(STORAGE_KEY, '1');
-  }
-
-  function showCard() {
-    if (gateInvalid) gateInvalid.classList.add('hidden');
-    if (gatePassword) gatePassword.classList.add('hidden');
-  }
-
-  function isLocalDev() {
-    var h = window.location.hostname;
-    return h === 'localhost' || h === '127.0.0.1' || h === '';
-  }
-
-  function initGates() {
-    var token = getToken();
-    var allowWithoutToken = isLocalDev();
-
-    if (!token && !allowWithoutToken) {
-      if (gateInvalid) gateInvalid.classList.remove('hidden');
-      if (gatePassword) gatePassword.classList.add('hidden');
-      return false;
-    }
-
-    if (isUnlocked()) {
-      showCard();
-      initCard();
-      return true;
-    }
-
-    if (gateInvalid) gateInvalid.classList.add('hidden');
-    if (gatePassword) {
-      gatePassword.classList.remove('hidden');
-      gateError.textContent = '';
-    }
-
-    if (gateSubmit && gateInput) {
-      function tryUnlock() {
-        var value = (gateInput.value || '').trim();
-        if (value === PASSWORD) {
-          setUnlocked();
-          showCard();
-          initCard();
-        } else {
-          gateError.textContent = 'Wrong password. Try again.';
-        }
-      }
-      gateSubmit.addEventListener('click', tryUnlock);
-      gateInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') tryUnlock();
-      });
-    }
-    return false;
   }
 
   function initCard() {
@@ -97,12 +29,14 @@
         if (card.classList.contains('is-open')) return;
         card.classList.add('is-open');
         runHeartsConfetti();
+        sendFeedback();
       });
       btnYes.addEventListener('touchstart', function (e) {
         if (card.classList.contains('is-open')) return;
         e.preventDefault();
         card.classList.add('is-open');
         runHeartsConfetti();
+        sendFeedback();
       }, { passive: false });
     }
 
@@ -129,6 +63,19 @@
         e.preventDefault();
         downloadPig(e);
       }, { passive: false });
+    }
+
+    function sendFeedback() {
+      var apiUrl = typeof window.VALENTINES_API_URL === 'string' && window.VALENTINES_API_URL.trim();
+      var token = getToken();
+      if (!apiUrl || !token) return;
+      var url = apiUrl.replace(/\/$/, '') + '/api/opened';
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: token }),
+        keepalive: true
+      }).catch(function () {});
     }
 
     function runHeartsConfetti() {
@@ -192,5 +139,5 @@
     }, { passive: false });
   }
 
-  if (!initGates()) return;
+  initCard();
 })();
