@@ -106,8 +106,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* Padding reserves space for corner hearts so content doesn't overlap */
-  padding: 14% 12% 12% 12%;
+  padding: 17% 15% 15% 15%;
   gap: 0;
 }
 
@@ -116,21 +115,21 @@ body {
   font-size: clamp(1.8rem, 7.5vw, 2.55rem);
   color: #d81b60;
   pointer-events: none;
+  line-height: 1;
 }
-/* Sit in the corner padding zone (within the 14% / 12% padding) */
-.corner-tl { top: 3%; left: 3%; }
-.corner-tr { top: 3%; right: 3%; }
-.corner-bl { bottom: 3%; left: 3%; }
-.corner-br { bottom: 3%; right: 3%; }
+.corner-tl { top: 0; left: 2%; transform: translateY(-20%); }
+.corner-tr { top: 0; right: 2%; transform: translateY(-20%); }
+.corner-bl { bottom: 1%; left: 2%; }
+.corner-br { bottom: 1%; right: 2%; }
 
 .proposal-q {
   font-family: "Press Start 2P", cursive;
   font-size: clamp(0.55rem, 2.6vw, 0.85rem);
   line-height: 1.7;
   color: #e91e63;
-  margin: 0;
+  margin: 0 0 4% 0;
   text-align: center;
-  padding: 0 2%;
+  padding: 0 3%;
   flex-shrink: 0;
 }
 
@@ -138,7 +137,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4%;
+  gap: 5%;
   flex: 1;
   min-height: 0;
   width: 100%;
@@ -154,7 +153,7 @@ body {
 }
 
 .proposal-heart {
-  font-size: clamp(1.2rem, 5vw, 2.2rem);
+  font-size: clamp(1.7rem, 6.5vw, 2.9rem);
   color: #e91e63;
   line-height: 1;
   flex-shrink: 0;
@@ -167,7 +166,7 @@ body {
   align-items: center;
   gap: clamp(1rem, 6%, 2rem);
   min-height: 3rem;
-  padding: 2% 5% 0;
+  padding: 7% 5% 2% 0;
   flex-shrink: 0;
 }
 
@@ -224,8 +223,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8% 6%;
-  gap: 4%;
+  padding: 12% 10%;
+  gap: 6%;
 }
 
 .proposal-pig {
@@ -240,12 +239,14 @@ body {
 .btn-download {
   font-family: "Press Start 2P", cursive;
   font-size: clamp(0.65rem, 2.6vw, 1rem);
+  line-height: 1.8;
   padding: 0.65em 1.2em;
   min-height: 2.75em;
   border-radius: clamp(8px, 2vw, 14px);
   background: #ffb6c1;
   color: #e91e63;
   text-decoration: none;
+  text-align: center;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   display: inline-block;
