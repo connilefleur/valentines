@@ -11,15 +11,16 @@ A tiny **PWA** that works like a mini iPhone app: fullscreen, no Safari chrome, 
 - **icon-512.png** – 512×512 app icon (from `icon.svg`)
 - **icon.svg** – Source for the icon (edit and re-run `convert icon.svg -resize 512x512 icon-512.png` to refresh)
 
-## Deploy
+## Deploy (this repo)
 
-Upload this folder to:
+Repo: **https://github.com/connilefleur/birthday-card**
 
-- **Vercel**: drag folder to [vercel.com](https://vercel.com) or `vercel`
-- **Netlify**: drag folder to [netlify.com](https://netlify.com) or `netlify deploy`
-- **GitHub Pages**: push to a repo, Settings → Pages → source = main branch / root
+1. On GitHub: **Settings → Pages**
+2. Under “Build and deployment”, set **Source** to **GitHub Actions** (or “Deploy from a branch”)
+3. If using a branch: choose branch **main**, folder **/ (root)**, Save
+4. After a minute, the site is live at: **https://connilefleur.github.io/birthday-card/**
 
-You’ll get a URL like `https://your-project.vercel.app`.
+Other options: **Vercel** (drag folder or `vercel`), **Netlify** (drag folder or `netlify deploy`).
 
 ## What to send
 
