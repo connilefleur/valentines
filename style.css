@@ -99,6 +99,7 @@ body {
 
 /* --- Proposal front: white card, even % spacing --- */
 .card-front.proposal-front {
+  position: relative;
   background: #fff;
   border: 3px solid #ffb6c1;
   display: flex;
@@ -124,7 +125,7 @@ body {
 
 .proposal-q {
   font-family: "Press Start 2P", cursive;
-  font-size: clamp(0.45rem, 2.2vw, 0.7rem);
+  font-size: clamp(0.55rem, 2.6vw, 0.85rem);
   line-height: 1.7;
   color: #e91e63;
   margin: 0;
@@ -148,6 +149,8 @@ body {
   max-width: 90px;
   height: auto;
   object-fit: contain;
+  display: block;
+  background: transparent;
 }
 
 .proposal-heart {
@@ -157,23 +160,24 @@ body {
   flex-shrink: 0;
 }
 
-.proposal-stars {
-  font-size: clamp(0.7rem, 3.2vw, 1rem);
-  color: #ffb6c1;
-  letter-spacing: 0.25em;
-  margin: 0;
-  flex-shrink: 0;
-}
-
 .proposal-buttons {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: clamp(1rem, 6%, 2rem);
-  min-height: 0;
+  min-height: 3rem;
   padding: 2% 5% 0;
   flex-shrink: 0;
+}
+
+.btn-no-placeholder {
+  width: 5.5em;
+  min-width: 5.5em;
+  min-height: 2.5em;
+  flex-shrink: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .btn-yes,
@@ -205,8 +209,13 @@ body {
   background: #ffb6c1;
   color: #fff;
 }
+.btn-no.runaway {
+  position: absolute;
+  transition: left 0.15s ease-out, top 0.15s ease-out;
+  transform: translate(-50%, -50%);
+}
 
-/* --- Proposal back: pig + love you --- */
+/* --- Proposal back: pig + download --- */
 .card-back.proposal-back {
   background: #fff;
   border: 3px solid #ffb6c1;
@@ -224,13 +233,8 @@ body {
   max-width: 180px;
   height: auto;
   object-fit: contain;
-}
-
-.proposal-love {
-  font-family: "Press Start 2P", cursive;
-  font-size: clamp(0.55rem, 2.5vw, 0.9rem);
-  color: #e91e63;
-  margin: 0;
+  display: block;
+  background: transparent;
 }
 
 .btn-download {

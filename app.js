@@ -40,6 +40,59 @@
       }, { passive: false });
     }
 
+    if (btnNo) {
+      var cardFront = btnNo.closest('.proposal-front');
+      var runawayActive = false;
+
+      function pickRandomPosition() {
+        if (!cardFront) return;
+        var r = cardFront.getBoundingClientRect();
+        var w = btnNo.offsetWidth;
+        var h = btnNo.offsetHeight;
+        var pad = 10;
+        var rangeX = Math.max(0, r.width - w - pad * 2);
+        var rangeY = Math.max(0, r.height - h - pad * 2);
+        var centerX = pad + w / 2 + (rangeX > 0 ? Math.random() * rangeX : 0);
+        var centerY = pad + h / 2 + (rangeY > 0 ? Math.random() * rangeY : 0);
+        btnNo.style.left = centerX + 'px';
+        btnNo.style.top = centerY + 'px';
+      }
+
+      function activateRunaway() {
+        if (!cardFront || runawayActive) return;
+        runawayActive = true;
+        var noRect = btnNo.getBoundingClientRect();
+        var frontRect = cardFront.getBoundingClientRect();
+        var placeholder = document.createElement('span');
+        placeholder.className = 'btn-no-placeholder';
+        placeholder.setAttribute('aria-hidden', 'true');
+        btnNo.parentNode.insertBefore(placeholder, btnNo.nextSibling);
+        btnNo.classList.add('runaway');
+        btnNo.style.left = (noRect.left - frontRect.left + noRect.width / 2) + 'px';
+        btnNo.style.top = (noRect.top - frontRect.top + noRect.height / 2) + 'px';
+      }
+
+      function startRunaway(e) {
+        e.preventDefault();
+        if (!cardFront) return;
+        if (!runawayActive) activateRunaway();
+        pickRandomPosition();
+      }
+
+      function onHover(e) {
+        if (!runawayActive) {
+          activateRunaway();
+          pickRandomPosition();
+        } else {
+          pickRandomPosition();
+        }
+      }
+
+      btnNo.addEventListener('click', startRunaway);
+      btnNo.addEventListener('mouseenter', onHover);
+      btnNo.addEventListener('touchstart', startRunaway, { passive: false });
+    }
+
     var btnDownload = document.getElementById('btnDownload');
     if (btnDownload) {
       function downloadPig(e) {
