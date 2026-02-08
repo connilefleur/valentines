@@ -26,6 +26,35 @@ body {
   touch-action: manipulation;
 }
 
+/* --- Under development overlay (remove or hide with ?live=1 to go live) --- */
+.under-dev-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffb6c1;
+  padding: 1.5rem;
+}
+.under-dev-overlay.hidden {
+  display: none;
+}
+.under-dev-text {
+  font-family: "Press Start 2P", cursive;
+  font-size: clamp(0.65rem, 3vw, 1rem);
+  color: #e91e63;
+  margin: 0 0 0.5rem;
+}
+.under-dev-sub {
+  font-family: "Press Start 2P", cursive;
+  font-size: clamp(0.4rem, 2vw, 0.65rem);
+  color: #e91e63;
+  margin: 0;
+  opacity: 0.9;
+}
+
 /* --- Background floating hearts --- */
 .hearts {
   position: fixed;
